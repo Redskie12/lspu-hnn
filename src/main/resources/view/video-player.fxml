@@ -1,0 +1,65 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.media.MediaView?>
+
+<VBox xmlns="http://javafx.com/javafx/26"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="system.com.lostfound.VideoPlayerController"
+      spacing="15"
+      style="-fx-background-color: white;
+             -fx-background-radius: 12;
+             -fx-padding: 20;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="LSPU Video Gallery"
+           style="-fx-font-size: 24px;
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #176B45;"/>
+
+    <Label text="Discover the history and campuses of Laguna State Polytechnic University."
+           wrapText="true"
+           style="-fx-font-size: 14px;
+                  -fx-text-fill: #666666;"/>
+
+    <StackPane style="-fx-background-color: #171717;
+                      -fx-background-radius: 10;
+                      -fx-padding: 10;">
+
+        <MediaView fx:id="videoView"
+                   fitWidth="600"
+                   fitHeight="300"
+                   preserveRatio="true"/>
+
+    </StackPane>
+
+    <HBox spacing="10">
+
+        <Button fx:id="playButton"
+                text="Play"
+                onAction="#handlePlayPause"
+                style="-fx-background-color: #176B45;
+                       -fx-text-fill: white;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 6;"/>
+
+        <Button text="Stop"
+                onAction="#handleStop"/>
+
+        <Button text="Replay"
+                onAction="#handleReplay"/>
+
+    </HBox>
+
+    <Label fx:id="videoStatusLabel"
+           text="Loading video..."
+           wrapText="true"
+           style="-fx-text-fill: #666666;"/>
+
+</VBox>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane
+    style="-fx-background-color: #f4f7f5;"
+    xmlns="http://javafx.com/javafx/26"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="system.com.lostfound.TimelineController">
+
+    <!-- HEADER -->
+    <top>
+        <VBox spacing="12"
+              style="-fx-padding: 24 24 15 24;">
+
+            <Label
+                text="Historical Timeline"
+                style="-fx-font-size: 26px;
+                       -fx-font-weight: bold;
+                       -fx-text-fill: #174d35;"/>
+
+            <Label
+                text="Explore the history and important milestones of Laguna State Polytechnic University."
+                wrapText="true"
+                style="-fx-font-size: 13px;
+                       -fx-text-fill: #66756c;"/>
+
+            <!-- FILTERS -->
+            <HBox spacing="15"
+                  alignment="CENTER_LEFT"
+                  style="-fx-padding: 12 0 0 0;">
+
+                <VBox spacing="5">
+                    <Label
+                        text="Sort By"
+                        style="-fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-text-fill: #456052;"/>
+
+                    <ComboBox
+                        fx:id="sortComboBox"
+                        prefWidth="190"
+                        onAction="#handleFiltersChanged"
+                        style="-fx-background-radius: 7;
+                               -fx-border-radius: 7;"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label
+                        text="Filter by Year"
+                        style="-fx-font-size: 12px;
+                               -fx-font-weight: bold;
+                               -fx-text-fill: #456052;"/>
+
+                    <ComboBox
+                        fx:id="yearFilterComboBox"
+                        prefWidth="170"
+                        onAction="#handleFiltersChanged"
+                        style="-fx-background-radius: 7;
+                               -fx-border-radius: 7;"/>
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+    </top>
+
+    <!-- TIMELINE CONTENT -->
+    <center>
+        <ScrollPane
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            style="-fx-background: #f4f7f5;
+                   -fx-background-color: #f4f7f5;">
+
+            <content>
+                <VBox
+                    fx:id="timelineContainer"
+                    fillWidth="true"
+                    spacing="18">
+
+                    <padding>
+                        <Insets
+                            bottom="25"
+                            left="30"
+                            right="30"
+                            top="25"/>
+                    </padding>
+
+                </VBox>
+            </content>
+
+        </ScrollPane>
+    </center>
+
+</BorderPane>

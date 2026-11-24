@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane
+    xmlns="http://javafx.com/javafx/26"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="system.com.lostfound.HistoryController"
+    style="-fx-background-color: #f4f7f5;">
+
+    <top>
+        <VBox spacing="5"
+              style="-fx-padding: 24 24 0 24;">
+
+            <Label text="History Explorer &amp; BST"
+                   style="-fx-font-size: 26px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #174d35;"/>
+
+            <Label text="Explore the history and important milestones of Laguna State Polytechnic University."
+                   wrapText="true"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: #66756c;"/>
+
+        </VBox>
+    </top>
+
+    <center>
+        <HBox alignment="TOP_LEFT"
+              spacing="20"
+              style="-fx-padding: 24;">
+
+            <!-- LEFT SIDE: BST -->
+
+            <VBox spacing="12"
+                  HBox.hgrow="ALWAYS">
+
+                <HBox alignment="CENTER_LEFT"
+                      spacing="10">
+
+                    <Label text="Binary Search Tree"
+                           style="-fx-font-size: 19px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #174d35;"/>
+
+                    <Pane HBox.hgrow="ALWAYS"/>
+
+                    <Button text="Add Event"
+                            onAction="#handleAddEvent"
+                            style="-fx-background-color: #0B8060;
+                                   -fx-text-fill: white;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 6;
+                                   -fx-padding: 8 14;
+                                   -fx-cursor: hand;"/>
+
+                    <Button text="＋"
+                            onAction="#handleZoomIn"
+                            style="-fx-background-color: #176b43;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 16px;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 6;"/>
+
+                    <Button text="－"
+                            onAction="#handleZoomOut"
+                            style="-fx-background-color: #176b43;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 16px;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 6;"/>
+
+                    <Label fx:id="zoomLabel"
+                           text="100%"
+                           style="-fx-font-size: 14px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #174d35;"/>
+
+                    <Button text="Reset"
+                            onAction="#handleReset"
+                            style="-fx-background-color: #176b43;
+                                   -fx-text-fill: white;
+                                   -fx-font-weight: bold;
+                                   -fx-background-radius: 6;
+                                   -fx-padding: 7 15;"/>
+
+                </HBox>
+
+                <ScrollPane fitToHeight="false"
+                            fitToWidth="false"
+                            hbarPolicy="AS_NEEDED"
+                            vbarPolicy="AS_NEEDED"
+                            pannable="true"
+                            style="-fx-background-color: white;
+                                   -fx-background-radius: 10;
+                                   -fx-border-color: #dce5df;
+                                   -fx-border-radius: 10;"
+                            VBox.vgrow="ALWAYS">
+
+                    <content>
+                        <Pane fx:id="treeContainer"
+                              minHeight="600"
+                              minWidth="950"
+                              prefHeight="600"
+                              prefWidth="950"
+                              style="-fx-background-color: white;">
+
+                            <children>
+                                <Pane fx:id="treePane"
+                                      minHeight="600"
+                                      minWidth="950"
+                                      prefHeight="600"
+                                      prefWidth="950"/>
+                            </children>
+
+                        </Pane>
+                    </content>
+
+                </ScrollPane>
+
+            </VBox>
+
+            <!-- RIGHT SIDE: EVENT DETAILS -->
+
+            <VBox spacing="16"
+                  minWidth="400"
+                  prefWidth="400"
+                  maxWidth="400"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 10;
+                         -fx-padding: 22;
+                         -fx-border-color: #dce5df;
+                         -fx-border-radius: 10;">
+
+                <Label text="Historical Event"
+                       style="-fx-font-size: 20px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #174d35;"/>
+
+                <Label fx:id="yearLabel"
+                       text="Select a year"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #28764e;"/>
+
+                <Label fx:id="titleLabel"
+                       text="Select a year"
+                       wrapText="true"
+                       style="-fx-font-size: 17px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #222222;"/>
+
+                <ImageView fx:id="eventImage"
+                           fitHeight="230"
+                           fitWidth="350"
+                           preserveRatio="true"
+                           smooth="true"/>
+
+                <Label text="Description"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #174d35;"/>
+
+                <Label fx:id="descriptionLabel"
+                       wrapText="true"
+                       style="-fx-font-size: 14px;
+                              -fx-text-fill: #444444;"/>
+
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>
