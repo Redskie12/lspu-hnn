@@ -1,0 +1,53 @@
+
+name: Build Windows Installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 26
+        uses: actions/setup-java@v4
+        with:
+          distribution: oracle
+          java-version: '26'
+          cache: maven
+
+      - name: Build JavaFX application
+        run: mvn -B clean package
+
+      - name: Copy dependencies
+        run: mvn -B dependency:copy-dependencies "-DoutputDirectory=target/installer"
+
+      - name: Prepare application files
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force target/installer | Out-Null
+          Copy-Item target/LostAndFoundSystem-1.0.jar target/installer/
+          Get-ChildItem target/installer -Filter "javafx-*-26.jar" | Remove-Item
+          Get-ChildItem target/installer -Filter "jdk-jsobject-26.jar" | Remove-Item
+
+      - name: Install WiX Toolset
+        run: choco install wixtoolset --no-progress -y
+
+      - name: Create Windows EXE installer
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force target/dist | Out-Null
+          jpackage --type exe --name "LSPU-HNN" --input target/installer --main-jar LostAndFoundSystem-1.0.jar --main-class system.com.lostfound.Main --dest target/dist --java-options '--module-path=$APPDIR --add-modules=javafx.controls,javafx.fxml,javafx.media,javafx.web,jdk.jsobject --enable-native-access=javafx.graphics,javafx.web,javafx.media --upgrade-module-path=$APPDIR/jdk-jsobject-26-win.jar'
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LSPU-HNN-Windows-Installer
+          path: target/dist/*.exe
+          if-no-files-found: error
